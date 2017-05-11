@@ -2,7 +2,7 @@
 
 import argparse
 import os
-import icgconnect
+from icgconnect.collab import quick_upload
 import subprocess
 
 def main():
@@ -29,7 +29,7 @@ def main():
 
     _file = {'object_id':results.object_id,'file_md5sum':results.md5,'file_name':results.input}
 
-    icgconnect.collab.quick_upload(results.gnos_id, [_file], 'icgc-storage-client')
+    quick_upload(results.gnos_id, [_file], 'icgc-storage-client')
 
 
 if __name__ == '__main__':

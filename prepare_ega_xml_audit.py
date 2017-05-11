@@ -2,7 +2,7 @@
 
 import argparse
 import os
-import icgconnect
+from icgconnect import xml_audit
 
 def main():
 
@@ -26,31 +26,31 @@ def main():
 
     # Check if the input dataset xml file exists
     if not results.include_dataset and not results.dataset=='':
-        if not icgconnect.xml_audit.dataset_exists(input_folder, results.project_name, results.dataset):
+        if not xml_audit.dataset_exists(input_folder, results.project_name, results.dataset):
             raise ValueError("Dataset xml does not exist:"+ results.dataset)
 
     # Check if the experiment xml file exists
     if not results.experiment == None and not results.experiment=='':
-        if not icgconnect.xml_audit.experiment_exists(input_folder, results.project_name, results.dataset, results.experiment):
+        if not xml_audit.experiment_exists(input_folder, results.project_name, results.dataset, results.experiment):
             raise ValueError("Experiment xml does not exist:"+ results.experiment)
 
     # Check if the run xml file exists
     if not results.run == None and not results.run=='':
-        if not icgconnect.xml_audit.run_exists(input_folder, results.project_name, results.dataset, results.run):
+        if not xml_audit.run_exists(input_folder, results.project_name, results.dataset, results.run):
             raise ValueError("Run xml does not exist:"+ results.run)
 
     # Check if the sample xml file exists
     if not results.sample == None and not results.sample=='':
-        if not icgconnect.xml_audit.sample_exists(input_folder, results.project_name, results.dataset, results.sample):
+        if not xml_audit.sample_exists(input_folder, results.project_name, results.dataset, results.sample):
             raise ValueError("Sample xml does not exist:"+ results.run)
 
     # Check if the study xml file exists
     if not results.study == None and not results.study=='':
-        if not icgconnect.xml_audit.study_exists(input_folder, results.project_name, results.dataset, results.study):
+        if not xml_audit.study_exists(input_folder, results.project_name, results.dataset, results.study):
             raise ValueError("Study xml does not exist:"+ results.study)
 
     # Generating the combined xml files
-    icgconnect.xml_audit.quick_generate(input_folder, results.project_name,output_file, results.dataset, results.sample, results.study, results.run, results.experiment, results.include_dataset)
+    xml_audit.quick_generate(input_folder, results.project_name,output_file, results.dataset, results.sample, results.study, results.run, results.experiment, results.include_dataset)
 
 def validate_file_path(file_path):
     if not os.path.isfile(file_path):

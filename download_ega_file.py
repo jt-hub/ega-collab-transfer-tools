@@ -20,7 +20,6 @@ import subprocess
 import random, string
 import os
 import shutil
-import icgconnect
 
 def main():
 	#Parsing of the input parameters using argparse
