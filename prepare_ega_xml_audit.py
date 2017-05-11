@@ -12,6 +12,7 @@ def main():
     parser.add_argument('-p', '--project_name', dest="project_name", help="Name of the ICGC project")
     parser.add_argument('-d', '--dataset    ',  dest='dataset', help="Dataset EGA accesion ID", required=True)
     parser.add_argument('-e', '--experiment ',  dest='experiment', help="Experiment EGA accession ID")
+    parser.add_argument('-a', '--analysis   ',  dest='analysis', help="Analysis EGA accession ID")
     parser.add_argument('-r', '--run        ',  dest="run", help="Run EGA accession ID")
     parser.add_argument('-sa', '--sample    ',  dest="sample", help="Sample EGA accession ID")
     parser.add_argument('-st', '--study     ',  dest="study", help="Study EGA accession ID")
@@ -25,7 +26,7 @@ def main():
     output_file = results.output
 
     # Check if the input dataset xml file exists
-    if not results.include_dataset and not results.dataset=='':
+    if results.include_dataset and not results.dataset=='':
         if not xml_audit.dataset_exists(input_folder, results.project_name, results.dataset):
             raise ValueError("Dataset xml does not exist:"+ results.dataset)
 
@@ -33,6 +34,11 @@ def main():
     if not results.experiment == None and not results.experiment=='':
         if not xml_audit.experiment_exists(input_folder, results.project_name, results.dataset, results.experiment):
             raise ValueError("Experiment xml does not exist:"+ results.experiment)
+
+    # Check if the analysis xml file exists
+    if not results.analysis == None and not results.analysis=='':
+        if not xml_audit.analysis_exists(input_folder, results.project_name, results.dataset, results.analysis):
+            raise ValueError("Experiment xml does not exist:"+ results.analysis)
 
     # Check if the run xml file exists
     if not results.run == None and not results.run=='':
@@ -50,7 +56,7 @@ def main():
             raise ValueError("Study xml does not exist:"+ results.study)
 
     # Generating the combined xml files
-    xml_audit.quick_generate(input_folder, results.project_name,output_file, results.dataset, results.sample, results.study, results.run, results.experiment, results.include_dataset)
+    xml_audit.quick_generate(input_folder, results.project_name,output_file, results.dataset, results.sample, results.study, results.run, results.experiment, results.analysis,results.include_dataset)
 
 def validate_file_path(file_path):
     if not os.path.isfile(file_path):
