@@ -47,8 +47,11 @@ def main():
 
 			# Check if ASCP_EGA_USER environment variable exists: ega username
 			os.environ['ASCP_EGA_USER']
+
+			# Check if ASPERA_SCP_PASS environment variable exists: ascpera password
+			os.environ['ASPERA_SCP_PASS']
 		except KeyError:
-			raise KeyError("Global Variable: ASCP_EGA_HOST and ASCP_EGA_USER must exist in the environment.")
+			raise KeyError("Global Variable: ASCP_EGA_HOST, ASCP_EGA_USER and ASPERA_SCP_PASS must exist in the environment.")
 
 		# Raise an error if the output file exists
 		if os.path.isfile(results.output):
