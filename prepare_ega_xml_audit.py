@@ -16,6 +16,7 @@ def main():
     parser.add_argument('-sa', '--sample    ',  dest="sample", help="Sample EGA accession ID")
     parser.add_argument('-st', '--study     ',  dest="study", help="Study EGA accession ID")
     parser.add_argument('-o', '--output     ',  dest='output', help="Output .xml file", required=True)
+    parser.add_argument('--include-dataset', dest='include_dataset', default=False, help="Include the dataset xml", action='store_true')
     results = parser.parse_args()
 
 
@@ -49,7 +50,7 @@ def main():
             raise ValueError("Study xml does not exist:"+ results.study)
 
     # Generating the combined xml files
-    icgconnect.xml_audit.quick_generate(input_folder, results.project_name,output_file, results.dataset, results.sample, results.study, results.run, results.experiment)
+    icgconnect.xml_audit.quick_generate(input_folder, results.project_name,output_file, results.dataset, results.sample, results.study, results.run, results.experiment, results.include_dataset)
 
 def validate_file_path(file_path):
     if not os.path.isfile(file_path):
