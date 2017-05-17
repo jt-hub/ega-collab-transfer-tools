@@ -12,10 +12,10 @@ def main():
 	results = parser.parse_args()
 
 	try:
-                try:
-                        os.environ['EGA_DCK_KEY']
-                except KeyError:
-                        raise KeyError("Global Variable (Ega decryption key): EGA_DCK_KEY must exist as an environment variable")
+        try:
+                os.environ['EGA_DCK_KEY']
+        except KeyError:
+                raise KeyError("Global Variable (Ega decryption key): EGA_DCK_KEY must exist as an environment variable")
 
 		if not os.path.isfile(results.input):
 			raise ValueError("Input file does not exists: "+results.input)
