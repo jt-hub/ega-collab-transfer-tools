@@ -57,7 +57,7 @@ def main():
 		# Download process
 		subprocess.call(['ascp','-k','1','-QTl','100m','--file-list='+file_list,'--partial-file-suffix=PART','--ignore-host-key','--mode=recv','--host='+os.environ['ASCP_EGA_HOST'],'--user='+os.environ['ASCP_EGA_USER'],'.'])
 
-		os.rename(results.file_name, results.output)
+		os.rename(os.path.basename(results.file_name), results.output)
 
 		# Deletion of temporary elements
 		os.remove(file_list)
