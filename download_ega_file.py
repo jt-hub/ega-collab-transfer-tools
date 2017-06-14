@@ -5,7 +5,7 @@ This file download a from EGA server using aspera.
 For this script to works, the files under aspera have to be set-up in the following tree structure.
 
 data
-\___ {project_name}
+|___ {project_name}
            |____ {EGA_FILE_ACCESSION}.ext
 
 Example:
