@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from icgconnect.collab import download
+from icgconnect import collab, aws
 import os
 import argparse
 import subprocess
@@ -10,6 +10,7 @@ def main():
     # Parsing the command line arguments
     parser = argparse.ArgumentParser(description='Download a file from Collaboratory')
     parser.add_argument('-id', '--object-id', dest='object_id', help="Object ID on Collaboratory", required=True)
+    parser.add_argument('-s', '--source', dest='source', help="Server source", required=True, choices=['collab','aws'])
     parser.add_argument('-o', '--output', dest='out_dir', help="Output directory", required=True)
 
     results = parser.parse_args()
@@ -22,7 +23,11 @@ def main():
             print "Error: icgc-storage-client in not installed in the path"
             exit(1)
 
-    download(results.object_id,'icgc-storage-client',results.out_dir)
+    if results.source == "collab":
+        collab.download(results.object_id,'icgc-storage-client',results.out_dir)
+
+    if results.source == "aws":
+        aws.download(results.object_id, 'icgc-storage-client', results.out_dir)
 
 if __name__ == '__main__':
     main()
